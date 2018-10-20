@@ -10,6 +10,7 @@ class PreMatchController extends Controller
     public function photo_input()
     {
       $matches = $this->getMatches();
+      //dd($matches);
       return view('input.prematch', compact('matches'));
     }
 
@@ -19,7 +20,7 @@ class PreMatchController extends Controller
       $client = new Client();
 
       $today = \Carbon\Carbon::now()->toDateString();
-      $yesterday = \Carbon\Carbon::now()->subDay()->toDateString();
+      $yesterday = \Carbon\Carbon::now()->subMonth()->toDateString();
       $tomorrow = \Carbon\Carbon::now()->addDay()->toDateString();
 
       $res = $client->get('https://apifootball.com/api/',

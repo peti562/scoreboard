@@ -1,45 +1,75 @@
 {{--@extends('layouts.index')--}}
-@extends ('voyager::master')
+@extends ('master')
 
 @section('content')
 
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Matches from Yesterday, Today and Tomorrow</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Home Team</th>
+                        <th>Away Team</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Pre-Match Photo</th>
+                        <th>Result Photo</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
 
-    @foreach($matches as $match)
+                    <tr class="text-center">
+                        <th>Home Team</th>
+                        <th>Away Team</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Pre-Match Photo</th>
+                        <th>Result Photo</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    @foreach($matches as $match)
+                        <tr class="text-center">
+                            <td class="text-left">{{$match['match_hometeam_name']}}</td>
+                            <td class="text-left">{{$match['match_awayteam_name']}}</td>
+                            <td>{{$match['match_hometeam_score']}} - {{$match['match_awayteam_score']}}</td>
+                            <td>{{$match['match_date']}}</td>
+                            <td>{{$match['match_time']}}</td>
+                            <td>
+                                {{Form::open(['route' => 'prematch_photo_output', 'files' => false])}}
+                                {{ csrf_field() }}
+                                <input type="hidden" name="match_id" value="{{$match['match_id']}}">
+                                <div class="col l12 m12">
+                                    {{Form::submit('Generate Pre-Match Photo!', ['class' => 'btn btn-info btn-block'])}}
+                                    {{Form::close()}}
+                                </div>
+                            </td>
+                            <td>
+                                {{Form::open(['route' => 'result_photo_output', 'files' => false])}}
+                                {{ csrf_field() }}
+                                <input type="hidden" name="match_id" value="{{$match['match_id']}}">
+                                <div class="col l12 m12">
+                                    {{Form::submit('Generate Result Photo!', ['class' => 'btn btn-primary btn-block'])}}
+                                    {{Form::close()}}
+                                </div>
+                            </td>
+                        </tr>
 
-        <div class="col-md-4 matchcard" style="background-color: <?= $match['match_date'] == \Carbon\Carbon::now()->toDateString() ? '#abfca0' : '#d8d8d8'?> ">
-            <div class="col-md-6 text-right" style="color: <?= $match['match_live'] == 1 ? 'red' : 'black;' ?>;">
-                {{$match['match_hometeam_name']}}     {{$match['match_hometeam_score']}}
+
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-            <div class="col-md-6" style="color: <?= $match['match_live'] == 1 ? 'red' : 'black;' ?>;">
-                {{$match['match_awayteam_score']}}     {{$match['match_awayteam_name']}}
-            </div>
-
-          <?= $match['match_live'] == 1 ? '<div class="col-md-12 text-center">LIVE</div>' : '' ?>
-
-            <div class="col-md-12 text-center">
-                {{$match['match_date']}} - {{$match['match_time']}}
-            </div>
-
-            {{-- prematch photo generating--}}
-            {{Form::open(['route' => 'prematch_photo_output', 'files' => false])}}
-            {{ csrf_field() }}
-            <input type="hidden" name="match_id" value="{{$match['match_id']}}">
-            <div class="col l12 m12">
-                {{Form::submit('Generate Pre-Match Photo!', ['class' => 'btn btn-info'])}}
-                {{Form::close()}}
-            </div>
-            {{-- end of prematch photo generating--}}
-
-            {{-- post-match result photo generating--}}
-            {{Form::open(['route' => 'result_photo_output', 'files' => false])}}
-            {{ csrf_field() }}
-            <input type="hidden" name="match_id" value="{{$match['match_id']}}">
-            <div class="col l12 m12">
-                {{Form::submit('Generate Result Photo!', ['class' => 'btn btn-warning'])}}
-                {{Form::close()}}
-            </div>
-            {{-- end of post-match result photo generating--}}
-
         </div>
-    @endforeach
+        <div class="card-footer small text-muted"></div>
+    </div>
+
+
 @endsection
