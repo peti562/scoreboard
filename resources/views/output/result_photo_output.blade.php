@@ -1,4 +1,4 @@
-@extends ('voyager::master')
+@extends ('master')
 
 @section('content')
 <!DOCTYPE html>

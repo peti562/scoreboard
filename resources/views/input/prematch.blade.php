@@ -22,7 +22,7 @@
                         <th>Result Photo</th>
                     </tr>
                     </thead>
-                    <tfoot>
+                    <tfoot
 
                     <tr class="text-center">
                         <th>Home Team</th>
@@ -66,6 +66,7 @@
                     @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
         <div class="card-footer small text-muted"></div>

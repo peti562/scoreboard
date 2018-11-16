@@ -85,6 +85,8 @@ function drawCanvas(match_data){
         bkimg.src = source;
     }
 
+
+
     var result = {
         font: 'wc-font',
         font_size: '70',
@@ -106,7 +108,6 @@ function drawCanvas(match_data){
     };
 
     var home_team_name = {
-
         font: 'wc-font',
         font_size: '15',
         color: '#ffffff',
