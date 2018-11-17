@@ -24,8 +24,8 @@
     </style>
     <span style="font: 40px epl-font;">.</span>
     <canvas
-            width="700"
-            height="864"
+            width="900"
+            height="1000"
             id="canvas"></canvas>
 </div>
 
@@ -42,6 +42,8 @@
         home_crest: '{{$data['home_team_crest']}}',
         away_crest: '{{$data['away_team_crest']}}',
     };
+
+    var data = <?=json_encode($data)?>;
 
 </script>
 <script src="{{asset('js/canvas.js')}}"></script>
