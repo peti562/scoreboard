@@ -26,27 +26,19 @@
     <canvas
             width="900"
             height="1000"
-            id="canvas"></canvas>
+            id="canvas">
+    </canvas>
 </div>
 
 <button onclick="savingTheCanvas()">SAVE</button>
 
 <script>
-    var data = {
-        background_image: '{{$data['background_image']}}',
-        image_template: '{{$data['image_template']}}',
-        home_team_name: '{{$data['home_team_name']}}',
-        away_team_name: '{{$data['away_team_name']}}',
-        home_goals: '{{$data['home_team_goals']}}',
-        away_goals: '{{$data['away_team_goals']}}',
-        home_crest: '{{$data['home_team_crest']}}',
-        away_crest: '{{$data['away_team_crest']}}',
-    };
 
     var data = <?=json_encode($data)?>;
 
 </script>
-<script src="{{asset('js/canvas.js')}}"></script>
+<script src="{{asset('js/Photo.js')}}"></script>
+<script src="{{asset('js/'.$data['image_type'].'.js')}}"></script>
 
 </body>
 </html>

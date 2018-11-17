@@ -31,37 +31,46 @@ class GeneratorController extends Controller {
 
         $this->homeTeam->name = htmlspecialchars_decode($this->homeTeam->name);
         $this->awayTeam->name = htmlspecialchars_decode($this->awayTeam->name);
-    }
+        //dd($this->match);
 
-    use Notifiable;
+        $this->match['home_team_crest'] = url(
+            '/images/generator/team_logos/'.$this->homeTeam->country->name.'/'.str_replace(' ', '', $this->homeTeam->name).'.svg'
+        );
 
-    public function result(Request $request, Team $team)
-    {
+        $this->match['away_team_crest'] = url(
+            '/images/generator/team_logos/'.$this->awayTeam->country->name.'/'.str_replace(' ', '', $this->awayTeam->name).'.svg'
+        );
 
-        $data = [
-            'home_team' => $this->homeTeam->name,
-            'home_team_crest' => url(
-                '/images/generator/team_logos/'.$this->homeTeam->country->name.'/'.str_replace(' ', '', $this->homeTeam->name).'.svg'
-            ),
-            'home_team_goals' => $this->match['match_hometeam_score'],
-            'home_team_name' => $this->match['match_hometeam_name'],
-            'away_team' => $this->awayTeam->name,
-            'away_team_crest' => url(
-                '/images/generator/team_logos/'.$this->awayTeam->country->name.'/'.str_replace(' ', '', $this->awayTeam->name).'.svg'
-            ),
-            'away_team_goals' => $this->match['match_awayteam_score'],
-            'away_team_name' => $this->match['match_awayteam_name'],
-            'background_image' => $this->imageURL,
-            'image_template' => $this->image_template,
-            'colors' => [
-                'lineabove' => '#ffffff',
-                'block' => '#9D1016',
-                'ribbon' => '#F9C83F',
-                'ribbontext' => '#000000',
-                'result' => '#ffffff',
+        $lineup_home = collect($this->match['lineup']['home']['starting_lineups']);
+        $lineup_away = collect($this->match['lineup']['away']['starting_lineups']);
+
+        $this->match['lineup']['home']['starting_lineups'] = $lineup_home->sortBy('lineup_position')->values()->toArray();
+        $this->match['lineup']['away']['starting_lineups'] = $lineup_away->sortBy('lineup_position')->values()->toArray();
+
+        $this->match['colors'] = [
+            'home' => [
+                'color1'    => $this->homeTeam->color1,
+                'color2'    => $this->homeTeam->color2,
+                'color3'    => $this->homeTeam->color3,
+                'color4'    => $this->homeTeam->color4,
             ],
+            'away' => [
+                'color1'    => $this->awayTeam->color1,
+                'color2'    => $this->awayTeam->color2,
+                'color3'    => $this->awayTeam->color3,
+                'color4'    => $this->awayTeam->color4,
+            ]
         ];
 
+        $this->match['background_image']  = $this->imageURL;
+        $this->match['image_template']    = $this->image_template;
+
+    }
+
+
+    public function result()
+    {
+        $data = $this->match;
         foreach ($this->match['goalscorer'] as $goal)
         {
             $this->team = strlen($goal['home_scorer']) > 1 ? 'home' : 'away';
@@ -69,9 +78,21 @@ class GeneratorController extends Controller {
               'scorer'  => '('.$goal['time'].') '.trim(substr($goal[$this->team.'_scorer'], 3))
             ];
         }
+        $data['canvasWidth'] = 900;
+        $data['canvasHeight'] = 1000;
+        $data['font-type'] = 'epl-font';
+        $data['image_type'] = 'result';
+        return view('output.photo', compact('data'));
+    }
 
-        return view('output.result_photo_output', compact('data'));
+    public function lineups() {
+        $data = $this->match;
+        $data['canvasWidth'] = 900;
+        $data['canvasHeight'] = 1000;
+        $data['font_type'] = 'epl-font';
+        $data['image_type'] = 'lineups';
 
+        return view('output.photo', compact('data'));
     }
 
     public function postToFacebook(Request $request)
