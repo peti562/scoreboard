@@ -15,7 +15,7 @@ class Match {
         'query' => [
           'action' => 'get_events',
           'country_id' => '169',
-          'league_id' => '62',
+          'league_id' => '63', // 62 - EPL, 63 - CHAMPIONSHIP
           'from' => $from,
           'to' => $to,
           'APIkey' => config('app.apiKey')
