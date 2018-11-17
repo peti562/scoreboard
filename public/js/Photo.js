@@ -60,29 +60,6 @@ var Photo = function(){
                 context.transform(obj.tdata.a, (obj.tdata.b*-1), (obj.tdata.c*-1), obj.tdata.d, obj.tdata.e, obj.tdata.f);
             }
         },
-
-        lineup: function(team, context) {
-            player = {
-                font: data.font_type,
-                font_size: '22',
-                transform: false,
-                tdata: { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
-                text: 'XXXXXXXXX',
-                pos: {x: 220, y: 380}
-            };
-            if(team == 'away') {
-                player.pos.x = 670;
-            }
-            player.color = data.colors[team]['color4'];
-            //debugger;
-            for(i=0;i<data.lineup.home.starting_lineups.length; i++) {
-                number  = data.lineup[team]['starting_lineups'][i]['lineup_number'];
-                name    = data.lineup[team]['starting_lineups'][i]['lineup_player'].toUpperCase();
-                player.text = number + ' ' + name;
-                this.write(player, context, i+1);
-            }
-        },
-
         goalScorers: function(context){
             if(data.goals.home) {
                 for(i=0;i<data.goals.home.length; i++) {

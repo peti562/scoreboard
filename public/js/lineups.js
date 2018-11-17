@@ -6,7 +6,7 @@ var home_team_name = data.match_hometeam_name;
 var away_team_name = data.match_awayteam_name;
 var multiply = 1;
 var font_size = 15;
-var font_type = 'epl-font';
+var font_type = data.font_type;
 var font_width = 15;
 var crest_width = 150;
 var crest_y = 130;
@@ -63,6 +63,27 @@ var away_team_name = {
     pos: {x: 685, y: 280}
 };
 
+function writeLineUp(team, context){
+    player = {
+        font: font_type,
+        font_size: '22',
+        transform: false,
+        tdata: { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0},
+        text: 'XXXXXXXXX',
+        pos: {x: 220, y: 380}
+    };
+    if(team == 'away') {
+        player.pos.x = 670;
+    }
+    player.color = data.colors[team]['color4'];
+    //debugger;
+    for(i=0;i<data.lineup.home.starting_lineups.length; i++) {
+        number  = data.lineup[team]['starting_lineups'][i]['lineup_number'];
+        name    = data.lineup[team]['starting_lineups'][i]['lineup_player'].toUpperCase();
+        player.text = number + ' ' + name;
+        Photo.write(player, context, i+1);
+    }
+}
 
 
 setTimeout(function() {
@@ -77,24 +98,12 @@ function drawCanvas(match_data){
         Photo.draw(block_away, context);
         Photo.write(home_team_name, context);
         Photo.write(away_team_name, context);
-        Photo.lineup('home', context);
-        Photo.lineup('away', context);
+        writeLineUp('home', context);
+        writeLineUp('away', context);
         Photo.addImage(home_team_crest, context);
         Photo.addImage(away_team_crest, context);
         fulfill(result);
-    }).then(function(result){
-        return new Promise(function(fulfill, reject){
-
-            fulfill(result);
-        });
-    }).then(function(result){
-        return new Promise(function(fulfill, reject){
-
-            fulfill(result);
-        });
-    }).then(function(result){
-        console.log(lineabove);
-    });
+    })
 };
 
 function savingTheCanvas(){
