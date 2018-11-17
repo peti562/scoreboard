@@ -212,7 +212,6 @@ function drawCanvas(match_data){
         if(data.goals){
             Photo.goalScorers();
         }
-
         fulfill(result);
     }).then(function(result){
         return new Promise(function(fulfill, reject){

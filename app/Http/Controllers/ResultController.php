@@ -18,29 +18,33 @@ class ResultController extends Controller {
 
     public function photo_output(Request $request, Team $team)
     {
-        /*$match_id = '368889';*/
-        $match = Match::getById($request->match_id);
-        //dd($match);
+        $match_id = '343800';
+        if ($request->match_id) {
+            $match = Match::getById($request->match_id);
+        } else {
+            $match = Match::getById($match_id);
+        }
+
         $imageURL = url('images/england.jpg');
         $image_template = url('/images/wcresultimage.png');
 
 
-        $home_team = $this->getTeam($match['match_hometeam_name'], $team);
-        $away_team = $this->getTeam($match['match_awayteam_name'], $team);
+        $team->home = $team->where('name', $match['match_hometeam_name'])->first();
+        $team->away = $team->where('name', $match['match_awayteam_name'])->first();
 
-        $home_team->name = htmlspecialchars_decode($home_team->name);
-        $away_team->name = htmlspecialchars_decode($away_team->name);
+        $team->home->name = htmlspecialchars_decode($team->home->name);
+        $team->away->name = htmlspecialchars_decode($team->away->name);
 
         $data = [
-            'home_team' => $home_team->name,
+            'home_team' => $team->home->name,
             'home_team_crest' => url(
-                '/images/generator/team_logos/'.$home_team->country->name.'/'.str_replace(' ', '', $home_team->name).'.svg'
+                '/images/generator/team_logos/'.$team->home->country->name.'/'.str_replace(' ', '', $team->home->name).'.svg'
             ),
             'home_team_goals' => $match['match_hometeam_score'],
             'home_team_name' => $match['match_hometeam_name'],
-            'away_team' => $away_team->name,
+            'away_team' => $team->away->name,
             'away_team_crest' => url(
-                '/images/generator/team_logos/'.$away_team->country->name.'/'.str_replace(' ', '', $away_team->name).'.svg'
+                '/images/generator/team_logos/'.$team->away->country->name.'/'.str_replace(' ', '', $team->away->name).'.svg'
             ),
             'away_team_goals' => $match['match_awayteam_score'],
             'away_team_name' => $match['match_awayteam_name'],
@@ -65,13 +69,6 @@ class ResultController extends Controller {
 
         return view('output.result_photo_output', compact('data'));
 
-    }
-
-    public function getTeam($name, $team)
-    {
-        $selectedTeam = $team->where('name', $name)->first();
-
-        return $selectedTeam;
     }
 
     public function postToFacebook(Request $request)
