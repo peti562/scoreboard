@@ -20,15 +20,6 @@ class PreMatchController extends Controller
       return view('input.prematch', compact('matches'));
     }
 
-    public function getMatches()
-    {
-
-
-
-
-
-
-    }
 
     public function photo_output()
     {

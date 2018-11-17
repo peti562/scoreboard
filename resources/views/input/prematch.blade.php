@@ -37,8 +37,8 @@
                     <tbody>
                     @foreach($matches as $match)
                         <tr class="text-center">
-                            <td class="text-left">{{$match['match_hometeam_name']}}</td>
-                            <td class="text-left">{{$match['match_awayteam_name']}}</td>
+                            <td class="text-left">{{htmlspecialchars_decode($match['match_hometeam_name'])}}</td>
+                            <td class="text-left">{{htmlspecialchars_decode($match['match_awayteam_name'])}}</td>
                             <td>{{$match['match_hometeam_score']}} - {{$match['match_awayteam_score']}}</td>
                             <td>{{$match['match_date']}}</td>
                             <td>{{$match['match_time']}}</td>
@@ -52,7 +52,7 @@
                                 </div>
                             </td>
                             <td>
-                                {{Form::open(['route' => 'result_photo_output', 'files' => false])}}
+                                {{Form::open(['route' => ['result_photo_output', $match['match_id']], 'files' => false])}}
                                 {{ csrf_field() }}
                                 <input type="hidden" name="match_id" value="{{$match['match_id']}}">
                                 <div class="col l12 m12">

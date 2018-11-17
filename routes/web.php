@@ -26,7 +26,7 @@ Route::get('/render', ['as' => 'render', 'uses' => 'RenderController@execute']);
 Route::get('/prematch', ['as' => 'prematch', 'uses' => 'PreMatchController@photo_input']);
 
 Route::post('/prematch_photo_output', ['as' => 'prematch_photo_output', 'uses' => 'PreMatchController@photo_output']);
-Route::get('/result_photo_output', ['as' => 'result_photo_output', 'uses' => 'ResultController@photo_output']);
+Route::post('/result_photo_output', ['as' => 'result_photo_output', 'uses' => 'ResultController@photo_output']);
 
 
 Route::group( ['prefix' => 'admin'], function () {

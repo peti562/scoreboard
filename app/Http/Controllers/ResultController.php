@@ -18,26 +18,29 @@ class ResultController extends Controller {
 
     public function photo_output(Request $request, Team $team)
     {
-        $match_id = '368889';
-
-        $match = Match::getById($match_id);
-
+        /*$match_id = '368889';*/
+        $match = Match::getById($request->match_id);
+        //dd($match);
         $imageURL = url('images/england.jpg');
         $image_template = url('/images/wcresultimage.png');
 
 
         $home_team = $this->getTeam($match['match_hometeam_name'], $team);
         $away_team = $this->getTeam($match['match_awayteam_name'], $team);
+
+        $home_team->name = htmlspecialchars_decode($home_team->name);
+        $away_team->name = htmlspecialchars_decode($away_team->name);
+
         $data = [
-            'home_team' => $home_team['team_name'],
+            'home_team' => $home_team->name,
             'home_team_crest' => url(
-                '/images/generator/team_logos/'.$home_team->country->name.'/'.$home_team->name.'.svg'
+                '/images/generator/team_logos/'.$home_team->country->name.'/'.str_replace(' ', '', $home_team->name).'.svg'
             ),
             'home_team_goals' => $match['match_hometeam_score'],
             'home_team_name' => $match['match_hometeam_name'],
-            'away_team' => $away_team['team_name'],
+            'away_team' => $away_team->name,
             'away_team_crest' => url(
-                '/images/generator/team_logos/'.$away_team->country->name.'/'.$away_team->name.'.svg'
+                '/images/generator/team_logos/'.$away_team->country->name.'/'.str_replace(' ', '', $away_team->name).'.svg'
             ),
             'away_team_goals' => $match['match_awayteam_score'],
             'away_team_name' => $match['match_awayteam_name'],
@@ -56,8 +59,7 @@ class ResultController extends Controller {
         {
             $team = strlen($goal['home_scorer']) > 1 ? 'home' : 'away';
             $data['goals'][$team][] = [
-              'time'    => $goal['time'],
-              'scorer'  => trim(substr($goal[$team.'_scorer'], 3))
+              'scorer'  => '('.$goal['time'].') '.trim(substr($goal[$team.'_scorer'], 3))
             ];
         }
 
