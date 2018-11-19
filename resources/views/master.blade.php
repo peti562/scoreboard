@@ -1,6 +1,6 @@
 
 @include('layouts.header')
-
+{{--
 @include('layouts.nav')
 
 <div id="wrapper">
@@ -12,7 +12,7 @@
 
         <div class="container-fluid">
 
-            @include('inc.breadcrumbs')
+            @include('inc.breadcrumbs')--}}
 
             {{--@include('dashboard.icon-cards')--}}
 
@@ -20,6 +20,7 @@
 
             @yield('content')
 
+{{--
         </div>
         <!-- /.container-fluid -->
 
@@ -38,4 +39,4 @@
 
 
 
-@include('layouts.footer')
+@include('layouts.footer')--}}

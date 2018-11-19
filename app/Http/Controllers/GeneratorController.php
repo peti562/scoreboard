@@ -95,6 +95,20 @@ class GeneratorController extends Controller {
         return view('output.photo', compact('data'));
     }
 
+    public function getimage(){
+        $client = new Client();
+
+        $url = 'http://localhost:8080/generate/lineups/32434';
+        $file_path = 'public';
+        $res = $client->get($url, ['save_to' => $file_path]);
+
+
+        dd($res);
+        $response = \GuzzleHttp\json_decode($res->getBody(), true);
+
+        return $response;
+    }
+
     public function postToFacebook(Request $request)
     {
         $result = Result::create(

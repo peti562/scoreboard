@@ -8,7 +8,7 @@
     <link href="{{asset('css/custom.css')}}" type="text/css" rel="stylesheet">
 </head>
 <body style="font-family: epl-font;">
-<div class="col l12 col m12">
+<div style="height: 990px;">
     <style>
         @import url({{url('font/Premier_League_Font_2018.ttf')}});
         @import url({{url('font/Dusha.ttf')}});
@@ -22,15 +22,17 @@
             src: url({{url('font/Dusha.ttf')}});
         }
     </style>
-    <span style="font: 40px epl-font;">.</span>
+    {{--<span style="font: 40px epl-font;">.</span>--}}
     <canvas
             width="900"
             height="1000"
             id="canvas">
     </canvas>
 </div>
+{{--
 
 <button onclick="savingTheCanvas()">SAVE</button>
+--}}
 
 <script>
 

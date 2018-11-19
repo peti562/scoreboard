@@ -27,6 +27,9 @@ Route::get('/prematch', ['as' => 'prematch', 'uses' => 'PreMatchController@photo
 
 Route::get('/result_photo_output', ['as' => 'result_photo_output', 'uses' => 'GeneratorController@result']);
 Route::get('/lineups', ['as' => 'lineups', 'uses' => 'GeneratorController@lineups']);
+Route::get('/getimage', ['as' => 'getimage', 'uses' => 'GeneratorController@getimage']);
+Route::get('/getcountries', ['as' => 'getcountries', 'uses' => 'CountriesController@get']);
+
 
 Route::post('/prematch_photo_output', ['as' => 'prematch_photo_output', 'uses' => 'PreMatchController@photo_output']);
 Route::post('/result_photo_output', ['as' => 'result_photo_output', 'uses' => 'GeneratorController@result']);

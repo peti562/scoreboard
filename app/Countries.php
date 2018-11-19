@@ -10,4 +10,9 @@ class Countries extends Model
     {
         return $this->hasMany('App\Team');
     }
+
+    public function league()
+    {
+        return $this->hasMany('App\Leagues');
+    }
 }
