@@ -4,6 +4,14 @@
 @section('content')
 
     <!-- DataTables Example -->
+    <select name="countries" id="countries">
+        @foreach($countries as $country)
+            <option value="{{ $country['id'] }}">{{ $country['name']}}</option>
+        @endforeach
+    </select>
+    <select name="leagues" id="leagues">
+            <option value=" "> </option>
+    </select>
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>
@@ -72,5 +80,11 @@
         <div class="card-footer small text-muted"></div>
     </div>
 
+<script>
+    var leagues = <?=json_encode($leaguesByCountry)?>;
+</script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+    <script src="{{asset('js/prematch/default.js')}}"></script>
 
 @endsection

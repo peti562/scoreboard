@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Countries extends Model
+class Country extends Model
 {
     public function team()
     {
@@ -13,6 +13,6 @@ class Countries extends Model
 
     public function league()
     {
-        return $this->hasMany('App\Leagues');
+        return $this->hasMany('App\League');
     }
 }

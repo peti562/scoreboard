@@ -3,22 +3,23 @@
 namespace App\Helpers;
 
 use GuzzleHttp\Client;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 
-class Match {
+class MatchHelper {
 
-  public static function getBetween($from, $to) {
+  public static function get($request) {
     $client = new Client();
 
     $res = $client->get('https://apifootball.com/api/',
       [
         'query' => [
-          'action' => 'get_events',
-          'country_id' => '169',
-          'league_id' => '63', // 62 - EPL, 63 - CHAMPIONSHIP
-          'from' => $from,
-          'to' => $to,
-          'APIkey' => config('app.apiKey')
+          'action'       => 'get_events',
+          'country_id'   => $request->country_id,
+          'league_id'    => $request->league_id, // 62 - EPL, 63 - CHAMPIONSHIP
+          'from'         => $request->from_date,
+          'to'           => $request->to_date,
+          'APIkey'       => config('app.apiKey')
         ],
         'headers' => [
           'content-type' => 'application/json'

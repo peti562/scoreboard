@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Countries;
-use App\Leagues;
+use App\Country;
+use App\League;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -43,10 +43,10 @@ class CountriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Countries  $countries
+     * @param  \App\Country  $countries
      * @return \Illuminate\Http\Response
      */
-    public function show(Countries $countries)
+    public function show(Country $countries)
     {
         //
     }
@@ -54,10 +54,10 @@ class CountriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Countries  $countries
+     * @param  \App\Country  $countries
      * @return \Illuminate\Http\Response
      */
-    public function edit(Countries $countries)
+    public function edit(Country $countries)
     {
         //
     }
@@ -66,10 +66,10 @@ class CountriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Countries  $countries
+     * @param  \App\Country  $countries
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Countries $countries)
+    public function update(Request $request, Country $countries)
     {
         //
     }
@@ -77,10 +77,10 @@ class CountriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Countries  $countries
+     * @param  \App\Country  $countries
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Countries $countries)
+    public function destroy(Country $countries)
     {
         //
     }

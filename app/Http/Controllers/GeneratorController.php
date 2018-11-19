@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Match;
+use App\Helpers\MatchHelper;
 use App\Notifications\ArticlePublished;
 use App\Result;
 use App\Team;
@@ -18,9 +18,9 @@ class GeneratorController extends Controller {
     {
         $match_id = '343800';
         if ($request->match_id) {
-            $this->match = Match::getById($request->match_id);
+            $this->match = MatchHelper::getById($request->match_id);
         } else {
-            $this->match = Match::getById($match_id);
+            $this->match = MatchHelper::getById($match_id);
         }
 
         $this->imageURL = url('images/england.jpg');

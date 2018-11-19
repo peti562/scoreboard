@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Leagues;
+use App\League;
 use Illuminate\Http\Request;
 
 class LeaguesController extends Controller
@@ -41,10 +41,10 @@ class LeaguesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Leagues  $leagues
+     * @param  \App\League  $leagues
      * @return \Illuminate\Http\Response
      */
-    public function show(Leagues $leagues)
+    public function show(League $leagues)
     {
         //
     }
@@ -52,10 +52,10 @@ class LeaguesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Leagues  $leagues
+     * @param  \App\League  $leagues
      * @return \Illuminate\Http\Response
      */
-    public function edit(Leagues $leagues)
+    public function edit(League $leagues)
     {
         //
     }
@@ -64,10 +64,10 @@ class LeaguesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Leagues  $leagues
+     * @param  \App\League  $leagues
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Leagues $leagues)
+    public function update(Request $request, League $leagues)
     {
         //
     }
@@ -75,10 +75,10 @@ class LeaguesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Leagues  $leagues
+     * @param  \App\League  $leagues
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Leagues $leagues)
+    public function destroy(League $leagues)
     {
         //
     }
