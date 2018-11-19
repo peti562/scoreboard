@@ -14,9 +14,9 @@ class CreateTeamsTable extends Migration
     public function up()
     {
       Schema::create('teams', function (Blueprint $table) {
-          $table->integer('team_id');
+          $table->primary('team_id')->unsigned();
           $table->string('team_name');
-        $table->integer('country_id')->unsigned();
+          $table->integer('country_id')->unsigned();
           $table->foreign('country_id')
               ->references('id')
               ->on('countries')
