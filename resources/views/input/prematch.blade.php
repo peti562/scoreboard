@@ -2,16 +2,33 @@
 @extends ('master')
 
 @section('content')
+    <form action="{{ url('/prematch') }}">
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="countries">Select Country</label>
+                <select class="custom-select form-control" name="country_id" id="countries">
+                    @foreach($countries as $country)
+                        <option value="{{ $country['id'] }}">{{ $country['name']}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="leagues">Select League</label>
+                <select class="custom-select" name="league_id" id="leagues">
+                    <option value=" "> </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="dates" style="color:white;">. </label>
+                <button id="dates" class="btn btn-default btn-block" disabled>dates come here</button>
+            </div>
+            <div class="col-md-3">
+                <label for="search" style="color:white;">. </label>
+                <button type="submit" id="search" class="btn btn-warning btn-block">Search</button>
+            </div>
+        </div>
+    </form>
 
-    <!-- DataTables Example -->
-    <select name="countries" id="countries">
-        @foreach($countries as $country)
-            <option value="{{ $country['id'] }}">{{ $country['name']}}</option>
-        @endforeach
-    </select>
-    <select name="leagues" id="leagues">
-            <option value=" "> </option>
-    </select>
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>

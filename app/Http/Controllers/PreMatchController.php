@@ -13,19 +13,21 @@ class PreMatchController extends Controller
 {
     public function photo_input(Request $request, Country $country, Match $match, League $leagues)
     {
-      if(!isset($request->from_date)) {
-          // From one month ago
-          $request->from_date = \Carbon\Carbon::now()->subMonth()->toDateString();
-          // Until tomorrow
-          $request->to_date   = \Carbon\Carbon::now()->addDay()->toDateString();
-      }
+
 
       $matches   = MatchHelper::get($request);
-      $countries = $country->get();
+      $countries = $country->get()->sortBy('name');
       $leaguesByCountry = $leagues->get()->groupBy('country_id');
+      $selected = [
+          'country' => $request->country_id,
+          'league'  => $request->league_id,
+      ];
 
-
-      return view('input.prematch', compact('matches', 'countries', 'leaguesByCountry'));
+      return view('input.prematch',
+          compact('matches',
+              'countries',
+                'leaguesByCountry',
+                'selected'));
     }
 
 
