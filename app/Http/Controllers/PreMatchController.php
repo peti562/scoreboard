@@ -21,13 +21,17 @@ class PreMatchController extends Controller
       $selected = [
           'country' => $request->country_id,
           'league'  => $request->league_id,
+          'from_date' => date("m/d/Y", strtotime($request->from_date)),
+          'to_date' => date("m/d/Y", strtotime($request->to_date)),
       ];
 
       return view('input.prematch',
           compact('matches',
               'countries',
                 'leaguesByCountry',
-                'selected'));
+                'selected',
+                'request')
+      );
     }
 
 

@@ -23,6 +23,9 @@
     <!-- Custom styles for this template-->
     <link href="{{asset("css/sb-admin.css")}}" rel="stylesheet">
 
+    <!-- Custom styles-->
+    <link href="{{asset("css/custom.css")}}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
