@@ -1,0 +1,16 @@
+.matchcard{
+    border: 1px solid black;
+    height: 300px;
+    font-size: 20px;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active{
+    background-color: #4d9e48 !important;
+}
+
+.fa-check {
+    color:green;
+}
+.fa-times{
+    color: #b32730;
+}
